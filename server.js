@@ -8,7 +8,7 @@ app.get('/',(req,res)=>{
     res.render('index', { title: 'Home Page',desc:'hello its description' });
     // return response
 })
-
+/////////////////////////////
 app.get('/about',(req,res)=>{
     res.render('about',{title:'about page'})
 })
