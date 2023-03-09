@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../dist/output.css" rel="stylesheet">
+    <link href="/styles/output.css" rel="stylesheet">
 
     <title>Document</title>
 </head>
@@ -12,6 +12,26 @@
     <h1  class=" text-3xl font-bold text-red-700">Welcome to <%= title %></h1>
     <p><%=desc%></p>
 
-    <a href="./about">about</a>
+    <form action="/" method="POST">
+        <input type="text" name="name" id="name" placeholder="Enter your name">
+        <input type="text" name="email" id="email" placeholder="Enter your email">
+        <input type="text" name="password" id="password" placeholder="Enter your password">
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+    <!-- if user exists print out user.name in heading -->
+    <% if(locals.user){ %>
+        <h1><%=user.name%></h1>
+    <% } %>
+
+        <ul>
+        <% users.forEach(function(user){ %>
+          <h1><%= user.name %></h1>
+        <% }); %>
+      </ul>
+
+    <a href="/about">about</a>
 </body>
 </html>

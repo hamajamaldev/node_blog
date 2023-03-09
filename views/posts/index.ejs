@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/styles/output.css" rel="stylesheet">
+</head>
+<body>
+<div class="container m-10">
+    <a href="/post/create" class=" bg-green-600 border p-4 m-10 text-white rounded">Create New Post</a>
+  
+    <div class="flex flex-col m-10">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full text-left text-sm font-light">
+                <thead class="border-b font-medium dark:border-neutral-500">
+                  <tr>
+                    <th scope="col" class="px-6 py-4">#</th>
+                    <th scope="col" class="px-6 py-4">title</th>
+                    <th scope="col" class="px-6 py-4">desc</th>
+                    <th scope="col" class="px-6 py-4">by</th>
+
+                    <th scope="col" class="px-6 py-4">Created_at</th>
+                    <th scope="col" class="px-6 py-4">Action</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                    <% posts.forEach(function(post){ %>
+
+                  <tr class="border-b dark:border-neutral-500">
+                    <td class="whitespace-nowrap px-6 py-4 font-medium">1</td>
+                    <td class="whitespace-nowrap px-6 py-4"><%= post.title %></td>
+                    <td class="whitespace-nowrap px-6 py-4"><%= post.desc %></td>
+                    <td class="whitespace-nowrap px-6 py-4"><%= post.user.name %></td>
+
+                    <td class="whitespace-nowrap px-6 py-4"><%= post.createdAt %></td>
+                    <td class="whitespace-nowrap px-6 py-4">
+
+                        <form action="/post/<%= post._id %>/delete" method="POST">
+                            <input type="hidden" name="id" value="<%= post._id %>">
+                            <a href="/post/<%= post._id %>/edit" class=" bg-green-600 border p-4 m-4 text-white rounded">Edit</a>
+
+                            <input type="submit" value="Delete" class=" bg-green-600 border p-4 m-4 text-white rounded">
+                        </form>
+                    </td>
+
+                  </tr>
+                    <% }); %>
+             
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+</div>
+</body>
+</html>

@@ -3,7 +3,16 @@ module.exports = {
   content: ["./views/**/*.ejs"],
 
   theme: {
-    extend: {},
+    extend: {
+      container: {
+        center: true,
+        padding: '2rem',
+        margin: '0 auto',
+        // justifyContent: 'center',
+        
+
+    },
   },
   plugins: [],
+}
 }
