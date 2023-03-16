@@ -60,7 +60,7 @@ else{
     await user.save();
 
     res.cookie('jwt',token,{ httpOnly: true, maxAge: expireDate });
-    res.status(200).json({status:'success',message:'user logged in'});
+    return res.redirect('/');
 
 
 }

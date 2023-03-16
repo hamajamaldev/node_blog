@@ -14,6 +14,8 @@ const authRouter = require('./routes/authRoutes');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const requireAuth = require('./middleware/requireAuth');
+const logedIn = require('./middleware/logedIn');
 
 
 
@@ -38,40 +40,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // routes
-app.all('/',checkAuth, viewRouter)
+app.all('/',requireAuth, viewRouter)
 app.use('/user', userRouter)
-app.use('/post',checkAuth, postRouter)
-app.use('/auth',authRouter)
+app.use('/post',requireAuth, postRouter)
+app.use('/auth',logedIn,authRouter)
 
-async function checkAuth(req, res, next) {
- // cget cookie and check if it exists from jwt token
-    const token = req.cookies.jwt;
-    // if token does not exist, redirect to login page
-    if (!token) {
-       return res.redirect('/auth/login')
-    }
 
-    // if token exists, verify token
-    const decoded = jwt.verify(token, 'node blog');
-    // if token is not valid, redirect to login page
-    if (!decoded) {
-        return res.redirect('/auth/login')
-    }
-    // find user in database search by token
-     const user = await User.findOne({ token: token });
-    // if user does not exist, redirect to login page
-    if (!user) {
-        return res.redirect('/auth/login')
-    }
-    
 
- 
-    next();
-    
-     
 
-    
-}
+
 
 
 // listen to port
