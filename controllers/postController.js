@@ -29,12 +29,15 @@ exports.store = async (req, res) => {
 
 // edit function redirects to the edit page
 exports.edit = async (req, res) => {
+
     const post = await Post.findById(req.params.id);
     res.render('posts/edit', { post });
 }
 
 // update function updates the data in the database
 exports.update = async (req, res) => {
+
+    
     const { id } = req.params;
     const post  = await Post.findById(id);
     post.title = req.body.title;
