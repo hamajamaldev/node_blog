@@ -10,9 +10,7 @@ const logedIn = function(req,res,next){
     if (token) {
          return res.redirect('/')
      }
-
-
-     next();
+      next();
 }
 
-module.exports = logedIn;
+ module.exports = logedIn;

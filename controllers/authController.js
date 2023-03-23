@@ -1,6 +1,7 @@
 const { json } = require('express');
 const { findOne } = require('../models/Post');
 const User = require('../models/User');
+const Role = require('../models/Role');
 const jwt = require('jsonwebtoken');
 
 
@@ -22,14 +23,28 @@ exports.register=async(req,res)=>{
 }
 
 exports.registerUser=async(req,res)=>{
+
+    // create admin role
+    //
+    const role  = new Role();
+    role.name = 'admin';
+    await role.save();
+    //
+    // get admin role id
+    const adminRole = await Role.findOne({name:'admin'});
+    
+
+    console.log(req.body);
     // res.send('register user');
     const {name,email,password}=req.body;
     const user=new User();
     user.name=name;
     user.email=email;
     user.password=password;
+    user.role=adminRole._id;
     await user.save();
-    res.redirect('/auth/login');
+
+    return res.redirect('/auth/login');
 }
 
 exports.loginUser=async(req,res)=>{

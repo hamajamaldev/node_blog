@@ -16,6 +16,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const requireAuth = require('./middleware/requireAuth');
 const logedIn = require('./middleware/logedIn');
+const checkRole = require('./middleware/checkRole');
 
 
 
@@ -42,8 +43,8 @@ app.use(cookieParser());
 // routes
 app.all('/',requireAuth, viewRouter)
 app.use('/user', userRouter)
-app.use('/post',requireAuth, postRouter)
-app.use('/auth',logedIn,authRouter)
+app.use('/post',requireAuth,checkRole, postRouter)
+app.use('/auth',authRouter)
 
 
 

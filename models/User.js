@@ -11,7 +11,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
-    token: String
+    token: String,
+    role: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+
     
 });
 
