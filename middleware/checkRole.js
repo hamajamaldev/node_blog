@@ -8,13 +8,14 @@ const checkRole = async function (req, res, next) {
     if (!user) {
         return res.redirect('/auth/login')
     }
-
+    
 
     if (user.role.name === 'admin') {
         next();
     } else {
               return res.redirect('/')
-    }
+    }   
+    
 
 }
 module.exports = checkRole;
